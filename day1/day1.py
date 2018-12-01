@@ -4,7 +4,7 @@ from itertools import cycle
 
 
 mylist = []
-with open('input.txt') as f:
+with open('input1.txt') as f:
     mylist = f.read().splitlines()
 
 total = 0
