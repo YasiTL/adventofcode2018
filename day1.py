@@ -8,7 +8,7 @@ with open('input1.txt') as f:
     mylist = f.read().splitlines()
 
 total = 0
-sumlist = []
+sumlist = set()
 total2 = 0
 
 
@@ -23,4 +23,6 @@ for num in cycle(mylist):
         print(total2)
         break
     else:
-        sumlist.append(total2)
+        sumlist.add(total2)
+
+#turns out sets are gods gift to programming ????
