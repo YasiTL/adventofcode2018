@@ -7,8 +7,8 @@ fabric = []
 fabric = [[0 for i in range(1000)] for i in range(1000)]
 
 overlap = 0
-idoverlaps = set()
-ids = set()
+id_overlaps = set()
+id_all = set()
 
 
 for claim in mylist:
@@ -18,32 +18,29 @@ for claim in mylist:
     p1 = int(claiminfo[2])
     w = int(claiminfo[3])
     h = int(claiminfo[4])
-    ids.add(id)
+    id_all.add(id)
 
     for i in range(w):
         if fabric[p1][p2+i] != id and fabric[p1][p2+i] != 0:
-            idoverlaps.add(fabric[p1][p2+i])
-            fabric[p1][p2+i] = id
-            idoverlaps.add(id)
+            id_overlaps.add(fabric[p1][p2+i])
+            fabric[p1][p2+i] = 'X'
+            id_overlaps.add(id)
         else:
             fabric[p1][p2+i] = id
 
         for j in range(h):
             if fabric[p1+j][p2+i] != id and fabric[p1+j][p2+i] != 0:
-                idoverlaps.add(fabric[p1+j][p2+i])
-                fabric[p1+j][p2+i] = id
-                idoverlaps.add(id)
+                id_overlaps.add(fabric[p1+j][p2+i])
+                fabric[p1+j][p2+i] = 'X'
+                id_overlaps.add(id)
 
             else:
                 fabric[p1+j][p2+i] = id
     
-
-
 for row in fabric:
     for elem in row:
         if elem == 'X':
             overlap += 1
 
-print(overlap)
-print(len(ids))
-print('PART 2:' + str(ids-idoverlaps))
+print('PART 1:' + str(overlap))
+print('PART 2:' + str(id_all - id_overlaps))
