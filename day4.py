@@ -16,6 +16,8 @@ sleep_time = 0
 guards = {}
 min_list = []
 
+minutes_sleeping_guards = {}
+
 for log in mylist:
     if '#' in log:
         id = int(log[log.find('#') : log.find('b')].replace('#', ''))
@@ -65,3 +67,32 @@ c = collections.Counter(min_list).most_common(1)
 print('MOST SLEPT MINUTE: ' + str(c[0][0])) 
 answer = int(c[0][0]) * int(chosen_guard)
 print('PART 1: ' + str(answer))
+
+min_list_2 = []
+
+
+# PART 2: Not proud of myself. There is no solution, looked for most occouring by hand...
+
+for log in mylist:
+    
+    if '#' in log:
+        id = int(log[log.find('#') : log.find('b')].replace('#', ''))
+    else:
+        if 'f' in log:
+            sleep_time = int(log[log.find(':') + 1 : log.find(']')])
+        if 'w' in log:
+            wake_time = int(log[log.find(':') + 1 : log.find(']')])
+            if minutes_sleeping_guards.get(id) is None:
+                minutes_sleeping_guards[id] = []
+
+            if minutes_sleeping_guards.get(id) is not None :
+                min_list_2 = minutes_sleeping_guards[id]
+                for min in range(sleep_time, wake_time):
+                    min_list_2.append(min)
+                    minutes_sleeping_guards[id] = min_list_2
+
+highest = {}
+for item, vals in minutes_sleeping_guards.items():
+    c = collections.Counter(vals).most_common(1)
+    highest[item] = c
+    print(str(item) + str(c))
